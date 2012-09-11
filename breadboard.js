@@ -18,7 +18,7 @@ function getVerbosePinVal(pin) {
 function setPinVal(pin, val) {
 
 	console.log("pin " + pin.terminal + pin.letter + ": ");
-	console.log(getVerbosePinVal(pin));
+	console.log(getPinVal(pin));
 
 	if (typeof val !== "boolean")
 		throw "Value: " + val + " is not a boolean";
@@ -36,8 +36,8 @@ function setPinVal(pin, val) {
 
 var Strip = Spine.Class.create({
 	init: function(args) {
-		this.terminal = args.terminal;
-		this.block = args.block;
+//		this.terminal = args.terminal;
+//		this.block = args.block;
 	},
 	block: null,
 	terminal: null,
@@ -121,11 +121,13 @@ Gates.OR = Gates.Gate.sub({
 /* Constructor            */
 /* ====================== */
 
-var strip1 = oddStrip.init({
+var strip1 = oddStrip({
 	block: 1,
 	terminal: 1
 });
-var strip2 = evenStrip.init({
+
+
+var strip2 = evenStrip({
 	block: 1,
 	terminal: 2
 });
@@ -135,13 +137,13 @@ var block = { 0 : [], 1: [], 2: [] };
 // populate block 0 with 64 pins
 for (var i = 0; i < 64; i++) {
 	if ( i%2 === 0 ) {
-		block[0].push(evenStrip.init({
+		block[0].push(evenStrip({
 			block: 0,
 			terminal: i
 		}));
 	}
 	else {
-		block[0].push(oddStrip.init({
+		block[0].push(oddStrip({
 			block: 0,
 			terminal: i
 		}));
