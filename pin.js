@@ -5,7 +5,7 @@ function getPinVal(pointer) {
 	return pin.value();
 };
 
-var block = [{}, {}, {}];
+var block = {0: {}, 1: {}, 2: {}};
 
 block[0].bus = {
 	vcc: {},
