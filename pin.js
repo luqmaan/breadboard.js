@@ -59,7 +59,7 @@ block[0].terminal.T1 = {
 				block: 0,
 				terminal: "T1"
 			}
-		},
+		},`
 		J: {
 			parent: {
 				block: 0,
