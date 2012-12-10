@@ -6,10 +6,10 @@
 
 	VCC           VG          A             B
 
-1	{-> 1A}       {}         []             [-> 2A]
-2	{}            {}         []             [LED -> 3B]
-3	{}            {}         []             []
-4	{}            {-> 4A}    []             [resistor -> 3A]
+0	{-> 0A}       {}         []             [-> 1A]
+1	{}            {}         []             [LED -> 2B]
+2	{}            {}         []             []
+3	{}            {-> 3A}    []             [resistor -> 2A]
 
 
 	BUS pin 1VCC conects to 1A.
@@ -25,3 +25,35 @@
 	S3 now carries a resisted current from ground. The LED is 
 
 */
+
+console.log ('hai')
+
+var breadboard = {
+	vcc: [{},{},{},{}],
+	vg: [{},{},{},{}],
+	a: [{},{},{},{}],
+	b: [{},{},{},{}]
+}
+
+breadboard.vcc[0].to = {
+	row: "A",
+	col: 0
+}
+breadboard.b[0].to = {
+	row: "A",
+	col: 1
+}
+breadboard.b[1].to = {
+	row: "B",
+	col: 2,
+	type: "led"
+}
+breadboard.vg[3].to = {
+	row: "A",
+	col: 3
+}
+breadboard.b[3].to = {
+	row: "A",
+	col: 2,
+	type: "resistor"
+}
