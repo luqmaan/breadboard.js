@@ -36,24 +36,76 @@ var breadboard = {
 }
 
 breadboard.vcc[0].to = {
-	row: "A",
+	row: "a",
 	col: 0
 }
 breadboard.b[0].to = {
-	row: "A",
+	row: "a",
 	col: 1
 }
 breadboard.b[1].to = {
-	row: "B",
+	row: "b",
 	col: 2,
 	type: "led"
 }
 breadboard.vg[3].to = {
-	row: "A",
+	row: "a",
 	col: 3
 }
 breadboard.b[3].to = {
-	row: "A",
+	row: "a",
 	col: 2,
 	type: "resistor"
+}
+
+
+breadboard.vcc.forEach(function(pin, index, obj) {
+	"use strict";
+	out ("vcc", index, pin)
+	if (pin.to) {
+		var r = pin.to.row
+		var c = pin.to.col
+		var to = breadboard[r][c]
+
+		to.value = "1" // we're on the vcc loop, so give this pin value 1
+
+		out (r, c, to)
+
+		var nr // next row
+
+		// follow a to if it exists
+
+		// strip search
+		if (r === "a")
+			nr = "b"
+		else nr = "a"
+
+		if ( breadboard[nr][c] ) {
+
+			var nto = breadboard[nr][c]
+			var nnc = nto.to.col
+			nto.value = 1
+			out (nr, c, nto)
+
+			// handle a to
+			
+
+			// handle next row
+			var nnr // next row
+			if (nr === "a")
+				nnr = "b"
+			else nnr = "a"
+
+			if (  breadboard[nnr][c]  )
+
+
+		}
+
+	}
+})
+
+function out(row, col, pin) {
+	"use strict";
+	console.log (row + col)
+	console.log (pin)
 }
