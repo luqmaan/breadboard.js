@@ -66,6 +66,13 @@ breadboard.vcc.forEach(function(pin, index, obj) {
 
 })
 
+breadboard.vg.forEach(function(pin, index, obj) {
+	"use strict";
+
+	handleTo(pin, 0, "vg", index )
+
+})
+
 function out(row, col, pin) {
 	"use strict";
 	console.log (row + col)
