@@ -61,47 +61,9 @@ breadboard.b[3].to = {
 
 breadboard.vcc.forEach(function(pin, index, obj) {
 	"use strict";
-	out ("vcc", index, pin)
-	if (pin.to) {
-		var r = pin.to.row
-		var c = pin.to.col
-		var to = breadboard[r][c]
 
-		to.value = "1" // we're on the vcc loop, so give this pin value 1
+	handleTo(pin, 1, "vcc", index )
 
-		out (r, c, to)
-
-		var nr // next row
-
-		// follow a to if it exists
-
-		// strip search
-		if (r === "a")
-			nr = "b"
-		else nr = "a"
-
-		if ( breadboard[nr][c] ) {
-
-			var nto = breadboard[nr][c]
-			var nnc = nto.to.col
-			nto.value = 1
-			out (nr, c, nto)
-
-			// handle a to
-			
-
-			// handle next row
-			var nnr // next row
-			if (nr === "a")
-				nnr = "b"
-			else nnr = "a"
-
-			if (  breadboard[nnr][c]  )
-
-
-		}
-
-	}
 })
 
 function out(row, col, pin) {
@@ -109,3 +71,55 @@ function out(row, col, pin) {
 	console.log (row + col)
 	console.log (pin)
 }
+
+function handleTo(pin, value, curRow, curCol) {
+	"use strict";
+
+	if ( pin.to ) {
+
+		var r = pin.to.row
+		var c = pin.to.col
+		var nextPin = breadboard[r][c]
+
+		pin.value = value
+
+		console.log (curRow + curCol + " is connected to " + r + c + " which now has the value " + value)
+
+		handleTo(nextPin, value, r, c)
+		handleStrip(r, c, value)
+
+	}
+
+}
+
+function handleStrip(row, col, value) {
+	"use strict";
+
+	var nextRow
+
+	// later make this a for loop that goes through all the other potential rows
+	// for now, since we have only rows A & B, we can just toggle a/b
+
+	// strip search
+	if (row === "a")
+		nextRow = "b"
+	else nextRow = "a"
+
+	// update the value of the other pin on this strip
+	breadboard[nextRow][col].value = value
+
+	console.log ("all the pins on " + col + " have the value " + value + " because the pin on " + row + col + " had")
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
